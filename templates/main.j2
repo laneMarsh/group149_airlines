@@ -1,0 +1,222 @@
+<html>
+<head>
+<title>Group 149 Airlines</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript">
+		function showform(dowhat) {
+			/*
+			* four DIVS: browse, insert, update, delete
+			* this function sets one visible the others not
+			*/
+			if (dowhat == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+                document.getElementById('showParts').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+                document.getElementById('showParts').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+            else if (dowhat == 'showParts'){
+				document.getElementById('browse').style.display = 'none';
+                document.getElementById('showParts').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+            else if (dowhat == 'all'){
+				document.getElementById('browse').style.display = 'block';
+                document.getElementById('showParts').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'block';
+			}
+      else if (dowhat == 'removePart'){
+				document.getElementById('browse').style.display = 'nonw';
+        document.getElementById('showParts').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+        document.getElementById('removePart').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+        document.getElementById('showParts').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+        document.getElementById('removePart').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+    function newAircraft() { showform('insert'); }
+    function updateAircraft(pid) { showform('update'); }
+    function deleteAircraft(pid) { showform ('delete'); }
+    function showParts(pid) { showform ('showParts');}
+    function browseAircraft() { showform ('browse'); }
+    function removePart() {showform('removePart');}
+    function showAll() { showform ('all'); }
+</script>
+</head>
+
+<body onload="browseAircraft()">
+<h1>Aircraft</h1>
+
+[ <a href="index.html">Home</a> | <a href="parts.html">Parts</a> | <a href="aircraft.html">Aircraft</a> | <a href="removals.html">Removals</a> | <a href="repairs.html">Repairs</a> | <a href="inventory_locations.html">Inventory</a>]
+
+<div id="browse">
+<p><a href="#" onClick="showAll()">Display all forms</a> </p>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Aircraft ID</th>
+    <th>Model</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td align="center" >G1A-06</td>
+    <td align="center" >B737</td>
+    <td><a href="#" onClick="updateAircraft('this.aircraftID')">Edit</a></td>
+    <td><a href="#" onclick="deleteAircraft('this.aircraftID')">Delete</a></td>
+    <td><a href="#" onclick="showParts('this.aircraftID')">View Parts</a></td>
+  </tr>
+  <tr>
+    <td align="center" >G1A-51</td>
+    <td align="center" >A320</td>
+    <td><a href="#" onClick="updateAircraft('this.aircraftID')">Edit</a></td>
+    <td><a href="#" onclick="deleteAircraft('this.aircraftID')">Delete</a></td>
+    <td><a href="#" onclick="showParts('this.aircraftID')">View Parts</a></td>
+  </tr>
+  <tr>
+    <td align = "center">G1A-52</td>
+    <td align="center" >A320</td>
+    <td><a href="#" onClick="updateAircraft('this.aircraftID')">Edit</a></td>
+    <td><a href="#" onclick="deleteAircraft('this.aircraftID')">Delete</a></td>
+    <td><a href="#" onclick="showParts('this.aircraftID')">View Parts</a></td>
+  </tr>
+</table>
+<input class="btn" type="submit" id="newAircraft" value="Add New Aircraft" onClick="newAircraft()">
+<p>&nbsp;</p>
+<legend><strong>Search Aircraft</strong></legend>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Aircraft ID</th>
+    <th>Model</th>
+  </tr>
+  <tr>
+    <td align="center" ><input type="text"></td>
+    <td align="center" ><input type="text"></td>
+  </tr>
+</table>
+<input class="btn" type="submit" id="newAircraft" value="Search Aircraft">
+<p>&nbsp;</p>
+</div> <!-- browse -->
+
+<div id = "showParts" border = "1" cellpadding="5">
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Part Number</th>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>123A4567-1</td>
+            <td>Fuselage</td>
+            <td>Boeing's single aisle, aerodynamic tube</td>
+            <td><a href="#" onclick="removePart()"> Remove </a></td>
+        </tr>
+    </table>
+    <form method="POST" id="addAircraftPart">
+
+      <p>&nbsp;</p>
+<div > 
+
+</div id = "addPart" border = "1" cellpadding="5">
+      <legend><strong>Add Part to Aircraft</strong></legend>
+          <fieldset class="fields">
+            <label><strong>Aircraft ID:</strong></label> G1A-51
+              <label> <strong>Part Number: </strong></label>  <select name="searchUpdate">
+                <option>Select Part Number</option>
+                <option value="123A4567-1">123A4567-1</option>
+                <option value="987A6543-1">987A6543-1</option>
+                <option value="987A6543-2">987A6543-2</option>
+          </select>
+          </fieldset>
+          <input class="btn" type="submit" id="addAircraft" value="Add Part to Aircraft">
+          <input class="btn" type="button" value="Cancel" onClick="browseAircraft()">
+    </form> 
+</div>
+<p>&nbsp;</p>
+<div id="insert">
+    <form method="POST" id="addAircraft">
+        <legend><strong>Add Aircraft</strong></legend>
+            <fieldset class="fields">
+                <label> Aircraft ID </label> <input type="text" name="aircraftID">
+                <label> Model </label> <input type="text" name="model">
+            </fieldset>
+            <input class="btn" type="submit" id="addAircraft" value="Add Aircraft">
+            <input class="btn" type="button" value="Cancel" onClick="browseAircraft()">
+	</form> 
+</div><!-- insert -->
+<p>&nbsp;</p>
+<div id="update">
+
+    <form method="POST" id="updateAircraft">
+        <legend><strong>Update Aircraft</strong></legend>
+          <fieldset class="fields">
+          <input type="hidden" name="aircraftID" id="updateAircraftID" value="1">
+          <label> Aircraft ID: </label>  <select name="searchUpdate">
+                <option>Select Aircraft</option>
+                <option value="G1A-06">G1A-06</option>
+                <option value="G1A-51">G1A-51</option>
+                <option value="G1A-53">G1A-53</option>
+          </select>
+            <label> Aircraft Name </label> <input type="text" name="fname">
+      </fieldset>
+          <input class="btn" type="submit" id="UpdateSaveAircraft" value="Save Update Aircraft">
+          <input class="btn" type="button" value="Cancel" onClick="browseAircraft()">
+	</form> 
+</div><!-- update -->
+<p>&nbsp;</p>
+<div id="delete" style="display: block">
+  <form method="POST" id="deleteAircraft">
+      <legend><strong>Delete Aircraft</strong></legend>
+          <fieldset class="fields">
+          <p><strong>Are you sure you wish to delete the following?</strong> </p>
+          <input type="hidden" name="aircraftID" id="deleteaircraftID" value="1">
+          <label><strong>Aircraft Number:</strong></label> G1A-06
+            <label> <strong>Model: </strong> </label> B737
+
+            
+    </fieldset>
+    <input class="btn" type="submit" id="DeleteAircraft" value="Delete Aircraft">
+          <input class="btn" type="button" value="Cancel" onClick="browseAircraft()">
+  </form> 
+</div><!-- delete -->
+<p>&nbsp;</p>
+<div id="remove" style="display: block">
+  <form method="POST" id="removePart">
+      <legend><strong>Remove Part</strong></legend>
+          <fieldset class="fields">
+          <p><strong>Are you sure you wish to remove the following part?</strong> </p>
+          <input type="hidden" name="aircraftID" id="deleteaircraftID" value="1">
+          <label><strong>Part Number:</strong></label> 123A4567-1
+          <label><strong>Aircraft ID:</strong></label> G1A-06
+    </fieldset>
+    <input class="btn" type="submit" id="DeleteAircraft" value="Remove Part">
+          <input class="btn" type="button" value="Cancel" onClick="browseAircraft()">
+  </form> 
+</div><!-- delete -->
+</body>
+</html>
