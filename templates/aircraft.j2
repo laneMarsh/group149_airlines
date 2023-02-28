@@ -72,39 +72,29 @@
 <body onload="browseAircraft()">
 <h1>Aircraft</h1>
 
-[ <a href="index.html">Home</a> | <a href="parts.html">Parts</a> | <a href="aircraft.html">Aircraft</a> | <a href="removals.html">Removals</a> | <a href="repairs.html">Repairs</a> | <a href="inventory_locations.html">Inventory</a>]
+[ <a href="/">Home</a> | <a href="parts.html">Parts</a> | <a href="aircraft.html">Aircraft</a> | <a href="removals.html">Removals</a> | <a href="repairs.html">Repairs</a> | <a href="inventory_locations.html">Inventory</a>]
 
 <div id="browse">
 <p><a href="#" onClick="showAll()">Display all forms</a> </p>
 <table border="1" cellpadding="5">
   <tr>
-    <th>Aircraft ID</th>
-    <th>Model</th>
+    {% for key in aircraft[0].keys() %}
+    <th>{{ key }}</th>
+    {% endfor %}
     <th></th>
     <th></th>
     <th></th>
   </tr>
+  {% for ac in aircraft %}
   <tr>
-    <td align="center" >G1A-06</td>
-    <td align="center" >B737</td>
+    {% for key in ac.keys() %}
+    <td>{{ac[key]}}</td>
+    {% endfor %}
     <td><a href="#" onClick="updateAircraft('this.aircraftID')">Edit</a></td>
     <td><a href="#" onclick="deleteAircraft('this.aircraftID')">Delete</a></td>
     <td><a href="#" onclick="showParts('this.aircraftID')">View Parts</a></td>
-  </tr>
   <tr>
-    <td align="center" >G1A-51</td>
-    <td align="center" >A320</td>
-    <td><a href="#" onClick="updateAircraft('this.aircraftID')">Edit</a></td>
-    <td><a href="#" onclick="deleteAircraft('this.aircraftID')">Delete</a></td>
-    <td><a href="#" onclick="showParts('this.aircraftID')">View Parts</a></td>
-  </tr>
-  <tr>
-    <td align = "center">G1A-52</td>
-    <td align="center" >A320</td>
-    <td><a href="#" onClick="updateAircraft('this.aircraftID')">Edit</a></td>
-    <td><a href="#" onclick="deleteAircraft('this.aircraftID')">Delete</a></td>
-    <td><a href="#" onclick="showParts('this.aircraftID')">View Parts</a></td>
-  </tr>
+  {% endfor %}
 </table>
 <input class="btn" type="submit" id="newAircraft" value="Add New Aircraft" onClick="newAircraft()">
 <p>&nbsp;</p>

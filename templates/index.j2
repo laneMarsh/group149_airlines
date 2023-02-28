@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Group 149 Airlines</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript">
+		function showform(dowhat) {
+			/*
+			* four DIVS: browse, insert, update, delete
+			* this function sets one visible the others not
+			*/
+			if (dowhat == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+      else if (dowhat == 'all'){
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+    function newPerson() { showform('insert'); }
+    function updatePerson(pid) { showform('update'); }
+    function deletePerson(pid) { showform ('delete'); }
+    function browsePeople() { showform ('browse'); }
+    function showAll() { showform ('all'); }
+</script>
+</head>
+
+
+<h1>Group 149 Airlines </h1>
+
+[ <a href="index.html">Home</a> | <a href="parts.html">Parts</a> | <a href="aircraft">Aircraft</a> | <a href="removals.html">Removals</a> | <a href="repairs.html">Repairs</a> | <a href="inventory_locations.html">Inventory</a>]
+
+<p> Welcome to Group 149 component logging application. This application enables to track parts, aircraft, part removals, part repairs, and current inventory of parts. Information on these entites can be accessed by navigating the links above. 
+
+</p>
+<footer>
+  <p>Last Modified 2/16/23 <cite>&copy; 2022 Lane Marsh & Richard Doherty</cite></p>
+</footer>
+
+</body>
+</html>
