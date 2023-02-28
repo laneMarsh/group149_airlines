@@ -12,5 +12,5 @@ This project is for the Oregon State University introduction to databases course
 - repairs
 
 ## Contributors
-Richard Doherty
-Lane Marsh
+- Richard Doherty
+- Lane Marsh
