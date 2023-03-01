@@ -1,0 +1,18 @@
+<html>
+<script language="JavaScript">
+    function browseAircraft() {
+        location.href = "/aircraft";
+    };
+</script> 
+<div id="insert">
+    <form method="POST" id="addAircraft">
+        <legend><strong>Add Aircraft</strong></legend>
+            <fieldset class="fields">
+                <label> Aircraft ID </label> <input type="text" name="aircraftID">
+                <label> Model </label> <input type="text" name="model">
+            </fieldset>
+            <input class="btn" type="submit" id="addAircraft" value="Add Aircraft">
+            <input class="btn" type="button" id="Cancel" value="Cancel" onClick="browseAircraft()">
+	</form> 
+</div>
+</html>
