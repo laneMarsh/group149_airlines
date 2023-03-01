@@ -61,7 +61,7 @@
 		}
     function newAircraft() { location.href = "/aircraft/create"; }
     function updateAircraft(pid) { showform('update'); }
-    function deleteAircraft(pid) { showform ('delete'); }
+    function deleteAircraft(pid) { location.href = "/aircraft/delete/dos_mas"; }
     function showParts(pid) { showform ('showParts');}
     function browseAircraft() { showform ('browse'); }
     function removePart() {showform('removePart');}
@@ -91,7 +91,7 @@
     <td>{{ac[key]}}</td>
     {% endfor %}
     <td><a href="#" onClick="updateAircraft('this.aircraftID')">Edit</a></td>
-    <td><a href="#" onclick="deleteAircraft('this.aircraftID')">Delete</a></td>
+    <td><a href="aircraft/delete/{{ac['id_aircraft']}}" class="btn btn-default">Delete</a></td>
     <td><a href="#" onclick="showParts('this.aircraftID')">View Parts</a></td>
   <tr>
   {% endfor %}
@@ -147,19 +147,6 @@
           <input class="btn" type="button" value="Cancel" onClick="browseAircraft()">
     </form> 
 </div>
-<p>&nbsp;</p>
-<div id="insert">
-    <form method="POST" id="addAircraft">
-        <legend><strong>Add Aircraft</strong></legend>
-            <fieldset class="fields">
-                <label> Aircraft ID </label> <input type="text" name="aircraftID">
-                <label> Model </label> <input type="text" name="model">
-            </fieldset>
-            <input class="btn" type="submit" id="addAircraft" value="Add Aircraft">
-            <input class="btn" type="button" value="Cancel" onClick="browseAircraft()">
-	</form> 
-</div><!-- insert -->
-<p>&nbsp;</p>
 <div id="update">
 
     <form method="POST" id="updateAircraft">

@@ -1,0 +1,20 @@
+<html>
+<script language="JavaScript">
+    function browseAircraft() {
+        location.href = "/aircraft";
+    };
+</script> 
+<div id="delete" style="display: block">
+    <form method="POST" id="deleteAircraft">
+        <legend><strong>Delete Aircraft</strong></legend>
+            <fieldset class="fields">
+            <p><strong>Are you sure you wish to delete the following?</strong> </p>
+            <input type="hidden" name="aircraftID" id="deleteaircraftID" value="1">
+            <label><strong>Aircraft Number:</strong>{{aircraft_id}}</label> 
+              <label> <strong>Model: </strong>{{model}}</label> 
+      </fieldset>
+      <input class="btn" type="submit" id="DeleteAircraft" value="Delete Aircraft">
+            <input class="btn" type="button" value="Cancel" onClick="browseAircraft()">
+    </form>
+  </div>
+</html>

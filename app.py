@@ -22,7 +22,7 @@ def aircraft_page():
     
 
 @app.route('/aircraft/create', methods=['POST', 'GET'])
-def add_aircraft_page():
+def add_aircraft():
     if request.method == "GET":
         return render_template("aircraft/add_aircraft.j2")
 
@@ -34,7 +34,22 @@ def add_aircraft_page():
             cur = db.execute_query(db_connection=db_connection, query=add_ac_query)
         return redirect('/aircraft')
 
+@app.route('/aircraft/delete/<string:aircraft_id>', methods=['POST', 'GET'])
+def delete_aircraft(aircraft_id):
+    if request.method == "GET":
+        fetch_ac_query = 'SELECT * FROM aircraft WHERE id_aircraft="' + aircraft_id + '"'
+        cur = db.execute_query(db_connection=db_connection, query=fetch_ac_query)
+        result = cur.fetchall()
+        ac_id = result[0]["id_aircraft"]
+        model = result[0]["model"]
+        return render_template("aircraft/delete_aircraft.j2", aircraft_id=ac_id, model=model)
+    
+    if request.method == "POST":
+        del_query = 'DELETE FROM aircraft WHERE id_aircraft = "' + aircraft_id + '"'
+        cur = db.execute_query(db_connection=db_connection, query=del_query)
+        return redirect('/aircraft')
+
 # Listener
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 45434)) 
+    port = int(os.environ.get('PORT', 45434))
     app.run(port=port, debug=True)
