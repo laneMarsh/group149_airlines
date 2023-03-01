@@ -58,13 +58,27 @@ def aircraft_parts(aircraft_id):
         ac_parts = cur.fetchall()
         cur = db.execute_query(db_connection=db_connection, query=all_parts_query)
         all_parts = cur.fetchall()
-        return render_template("aircraft/aircraft_parts.j2", ac_parts=ac_parts, parts_list=all_parts)
+        return render_template("aircraft/aircraft_parts.j2", ac_parts=ac_parts, parts_list=all_parts, ac=aircraft_id)
 
     if request.method == "POST":
         pn = request.form["searchUpdate"]
         add_part_query = 'INSERT INTO aircraft_parts VALUES ("' + aircraft_id + '", "' + pn + '");'
         cur = db.execute_query(db_connection=db_connection, query=add_part_query)
         return redirect('/aircraft/parts/' + aircraft_id)
+
+@app.route('/aircraft/parts/<string:aircraft_id>/<string:pn>', methods=['POST', 'GET'])
+def del_aircraft_parts(aircraft_id, pn):
+    if request.method == "GET":
+        return render_template("aircraft/delete_part.j2", aircraft_id=aircraft_id, pn=pn)
+    
+    if request.method =="POST":
+        del_query = 'DELETE FROM aircraft_parts WHERE id_aircraft = "' + aircraft_id + '" AND part_number = "' + pn + '"'
+        cur = db.execute_query(db_connection=db_connection, query=del_query)
+        return redirect('/aircraft/parts/' + aircraft_id)
+    
+
+
+
 
 # Listener
 if __name__ == "__main__":

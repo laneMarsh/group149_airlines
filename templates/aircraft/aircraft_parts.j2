@@ -18,7 +18,7 @@
           {% for key in part.keys() %}
           <td>{{part[key]}}</td>
           {% endfor %}
-          <td><a href="#" onclick="removePart()"> Remove </a></td>
+          <td><a href="{{ac}}/{{part['part_number']}}" class="btn btn-default"> Remove </a></td>
         <tr>
         {% endfor %}
       </table>
@@ -29,7 +29,7 @@
 <div id = "addPart" border = "1" cellpadding="5">
       <legend><strong>Add Part to Aircraft</strong></legend>
           <fieldset class="fields">
-            <label><strong>Aircraft ID:</strong></label> G1A-51
+            <label><strong>Aircraft ID:</strong></label> {{ac}}
               <label> <strong>Part Number: </strong></label>  <select name="searchUpdate">
                 <option>Select Part Number</option>
                 {% for part in parts_list %}
