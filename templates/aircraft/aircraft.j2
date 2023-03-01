@@ -61,7 +61,6 @@
 		}
     function newAircraft() { location.href = "/aircraft/create"; }
     function updateAircraft(pid) { showform('update'); }
-    function deleteAircraft(pid) { location.href = "/aircraft/delete/dos_mas"; }
     function showParts(pid) { showform ('showParts');}
     function browseAircraft() { showform ('browse'); }
     function removePart() {showform('removePart');}
@@ -83,117 +82,20 @@
     {% endfor %}
     <th></th>
     <th></th>
-    <th></th>
   </tr>
   {% for ac in aircraft %}
   <tr>
     {% for key in ac.keys() %}
     <td>{{ac[key]}}</td>
     {% endfor %}
-    <td><a href="#" onClick="updateAircraft('this.aircraftID')">Edit</a></td>
-    <td><a href="aircraft/delete/{{ac['id_aircraft']}}" class="btn btn-default">Delete</a></td>
-    <td><a href="#" onclick="showParts('this.aircraftID')">View Parts</a></td>
+    <td><a href="aircraft/delete/{{ac['id_aircraft']}}" class="btn btn-default">Retire Aircraft</a></td>
+    <td><a href="aircraft/parts/{{ac['id_aircraft']}}" class="btn btn-default">View Parts</a></td>
   <tr>
   {% endfor %}
 </table>
 <input class="btn" type="submit" id="newAircraft" value="Add New Aircraft" onClick="newAircraft()">
-<p>&nbsp;</p>
-<legend><strong>Search Aircraft</strong></legend>
-<table border="1" cellpadding="5">
-  <tr>
-    <th>Aircraft ID</th>
-    <th>Model</th>
-  </tr>
-  <tr>
-    <td align="center" ><input type="text"></td>
-    <td align="center" ><input type="text"></td>
-  </tr>
-</table>
-<input class="btn" type="submit" id="newAircraft" value="Search Aircraft">
-<p>&nbsp;</p>
+
 </div> <!-- browse -->
 
-<div id = "showParts" border = "1" cellpadding="5">
-    <table border="1" cellpadding="5">
-        <tr>
-            <th>Part Number</th>
-            <th>Name</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>123A4567-1</td>
-            <td>Fuselage</td>
-            <td>Boeing's single aisle, aerodynamic tube</td>
-            <td><a href="#" onclick="removePart()"> Remove </a></td>
-        </tr>
-    </table>
-    <form method="POST" id="addAircraftPart">
-
-      <p>&nbsp;</p>
-<div > 
-
-</div id = "addPart" border = "1" cellpadding="5">
-      <legend><strong>Add Part to Aircraft</strong></legend>
-          <fieldset class="fields">
-            <label><strong>Aircraft ID:</strong></label> G1A-51
-              <label> <strong>Part Number: </strong></label>  <select name="searchUpdate">
-                <option>Select Part Number</option>
-                <option value="123A4567-1">123A4567-1</option>
-                <option value="987A6543-1">987A6543-1</option>
-                <option value="987A6543-2">987A6543-2</option>
-          </select>
-          </fieldset>
-          <input class="btn" type="submit" id="addAircraft" value="Add Part to Aircraft">
-          <input class="btn" type="button" value="Cancel" onClick="browseAircraft()">
-    </form> 
-</div>
-<div id="update">
-
-    <form method="POST" id="updateAircraft">
-        <legend><strong>Update Aircraft</strong></legend>
-          <fieldset class="fields">
-          <input type="hidden" name="aircraftID" id="updateAircraftID" value="1">
-          <label> Aircraft ID: </label>  <select name="searchUpdate">
-                <option>Select Aircraft</option>
-                <option value="G1A-06">G1A-06</option>
-                <option value="G1A-51">G1A-51</option>
-                <option value="G1A-53">G1A-53</option>
-          </select>
-            <label> Aircraft Name </label> <input type="text" name="fname">
-      </fieldset>
-          <input class="btn" type="submit" id="UpdateSaveAircraft" value="Save Update Aircraft">
-          <input class="btn" type="button" value="Cancel" onClick="browseAircraft()">
-	</form> 
-</div><!-- update -->
-<p>&nbsp;</p>
-<div id="delete" style="display: block">
-  <form method="POST" id="deleteAircraft">
-      <legend><strong>Delete Aircraft</strong></legend>
-          <fieldset class="fields">
-          <p><strong>Are you sure you wish to delete the following?</strong> </p>
-          <input type="hidden" name="aircraftID" id="deleteaircraftID" value="1">
-          <label><strong>Aircraft Number:</strong></label> G1A-06
-            <label> <strong>Model: </strong> </label> B737
-
-            
-    </fieldset>
-    <input class="btn" type="submit" id="DeleteAircraft" value="Delete Aircraft">
-          <input class="btn" type="button" value="Cancel" onClick="browseAircraft()">
-  </form> 
-</div><!-- delete -->
-<p>&nbsp;</p>
-<div id="remove" style="display: block">
-  <form method="POST" id="removePart">
-      <legend><strong>Remove Part</strong></legend>
-          <fieldset class="fields">
-          <p><strong>Are you sure you wish to remove the following part?</strong> </p>
-          <input type="hidden" name="aircraftID" id="deleteaircraftID" value="1">
-          <label><strong>Part Number:</strong></label> 123A4567-1
-          <label><strong>Aircraft ID:</strong></label> G1A-06
-    </fieldset>
-    <input class="btn" type="submit" id="DeleteAircraft" value="Remove Part">
-          <input class="btn" type="button" value="Cancel" onClick="browseAircraft()">
-  </form> 
-</div><!-- delete -->
 </body>
 </html>

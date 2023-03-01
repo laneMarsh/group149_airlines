@@ -49,6 +49,15 @@ def delete_aircraft(aircraft_id):
         cur = db.execute_query(db_connection=db_connection, query=del_query)
         return redirect('/aircraft')
 
+@app.route('/aircraft/parts/<string:aircraft_id>', methods=['POST', 'GET'])
+def aircraft_parts(aircraft_id):
+    if request.method == "GET":
+        ac_parts_query = 'SELECT aircraft_parts.part_number, parts.name, parts.description FROM aircraft_parts INNER JOIN parts ON aircraft_parts.part_number = parts.part_number WHERE aircraft_parts.id_aircraft="' + aircraft_id + '";'
+        # ac_parts_query = 'SELECT * FROM aircraft_parts;'
+        cur = db.execute_query(db_connection=db_connection, query=ac_parts_query)
+        ac_parts = cur.fetchall()
+        return render_template("aircraft/aircraft_parts.j2", ac_parts=ac_parts)
+
 # Listener
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 45434))

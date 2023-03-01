@@ -106,5 +106,10 @@ FROM aircraft_parts
 INNER JOIN aircraft ON aircraft_parts.id_aircraft = aircraft.id_aircraft
 INNER JOIN parts ON aircraft_parts.part_number = parts.part_number;
 
+SELECT part_number.ac_parts, name.parts, description.parts
+FROM aircraft_parts AS ac_parts
+INNER JOIN parts ON ac_parts.part_number = parts.part_number
+WHERE ac_parts.id_aircraft = "id_aircraft";
+
 -- Delete
 DELETE FROM aircraft_parts WHERE id_aircraft = :id_aircraft_dropDown AND part_number = :part_number_dropDown;
