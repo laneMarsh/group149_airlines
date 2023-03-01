@@ -53,10 +53,18 @@ def delete_aircraft(aircraft_id):
 def aircraft_parts(aircraft_id):
     if request.method == "GET":
         ac_parts_query = 'SELECT aircraft_parts.part_number, parts.name, parts.description FROM aircraft_parts INNER JOIN parts ON aircraft_parts.part_number = parts.part_number WHERE aircraft_parts.id_aircraft="' + aircraft_id + '";'
-        # ac_parts_query = 'SELECT * FROM aircraft_parts;'
+        all_parts_query = 'SELECT part_number FROM parts;'
         cur = db.execute_query(db_connection=db_connection, query=ac_parts_query)
         ac_parts = cur.fetchall()
-        return render_template("aircraft/aircraft_parts.j2", ac_parts=ac_parts)
+        cur = db.execute_query(db_connection=db_connection, query=all_parts_query)
+        all_parts = cur.fetchall()
+        return render_template("aircraft/aircraft_parts.j2", ac_parts=ac_parts, parts_list=all_parts)
+
+    if request.method == "POST":
+        pn = request.form["searchUpdate"]
+        add_part_query = 'INSERT INTO aircraft_parts VALUES ("' + aircraft_id + '", "' + pn + '");'
+        cur = db.execute_query(db_connection=db_connection, query=add_part_query)
+        return redirect('/aircraft/parts/' + aircraft_id)
 
 # Listener
 if __name__ == "__main__":
