@@ -1,0 +1,22 @@
+<html>
+  <script language="JavaScript">
+    function browseRemovals() {
+        location.href = "/removals";
+    };
+</script> 
+    <div id = "details">
+        <table border="1" cellpadding="5">
+            <tr>
+              <th>Part Number</th>
+              <th>Name</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td align="center" >{{pn}}</td>
+              <td align="center" >{{nomenclature}}</td>
+              <td align="center">{{description}}</td>
+            </tr>
+          </table>
+          <input class="btn" type="button" value="Cancel" onClick="browseRemovals()">
+    </div>
+</html>

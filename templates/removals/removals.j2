@@ -68,39 +68,27 @@
 [ <a href="/">Home</a> | <a href="parts">Parts</a> | <a href="aircraft">Aircraft</a> | <a href="removals">Removals</a> | <a href="repairs">Repairs</a> | <a href="inventory_locations">Inventory</a>]
 
 <div id="browse">
-<p><a href="#" onClick="showAll()">Display all forms</a> </p>
 <table border="1" cellpadding="5">
   <tr>
-    <th>Removal Number</th>
-    <th>Removal Date</th>
-    <th>Removed Part Number</th>
-    <th>Aircraft ID</th>
-    <th>Replaced Part Number</th>
-    <th>Replacement Date</th>
+    {% for key in removals[0].keys() %}
+    <th>{{ key }}</th>
+    {% endfor %}
     <th></th>
     <th></th>
   </tr>
+  {% for removal in removals %}
   <tr>
-    <td align="center" >1</td>
-    <td align="center" >2023-02-01 00:00:00</td>
-    <td align="center"><a href="#" onclick= "showDetails()">987A6543-1</a></td>
-    <td align="center">G1A-01</td>    
-    <td align="center"><a href="#" onclick= "showDetails()">987A6543-1</a></td>
-    <td>2023-02-02 00:00:00</td>
+    <td align="center" >{{removal['id_removal']}}</td>
+    <td align="center" >{{removal['removal_date']}}</td>
+    <td align="center">{{removal['replacement_date']}}</a></td>
+    <td align="center">{{removal['id_aircraft']}}</td>    
+    <td align="center"><a href="removals/part_detail/{{removal['removed_part']}}">{{removal['removed_part']}}</a></td>
+    <td align="center"><a href="removals/part_detail/{{removal['installed_part']}}">{{removal['installed_part']}}</a></td>
     
     <td><a href="#" onClick="updateRemoval('this.removalID')">Edit</a></td>
     <td><a href="#" onclick="deleteRemoval('this.removalID')">Delete</a></td>
   </tr>
-  <tr>
-    <td align="center" >2</td>
-    <td align="center" >2023-02-09 00:00:00</td>
-    <td align="center"><a href="#" onclick= "showDetails()">987A6543-2</a></td>
-    <td align="center">G1A-02</td>    
-    <td align="center">-</td>
-    <td>2023-02-02 00:00:00</td>
-    <td><a href="#" onClick="updateRemoval('this.removalID')">Edit</a></td>
-    <td><a href="#" onclick="deleteRemoval('this.removalID')">Delete</a></td>
-  </tr>
+  {% endfor %}
 </table>
 <p>&nbsp;</p>
 <legend><strong>Search Removals</strong></legend>

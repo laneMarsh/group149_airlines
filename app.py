@@ -157,6 +157,23 @@ def delete_repair(repair_id):
         cur = db.execute_query(db_connection=db_connection, query=del_query)
         return redirect('/repairs')
 
+@app.route('/removals', methods=['POST', 'GET'])
+def removals_page():
+    if request.method == "GET":
+        removals_query = "SELECT * FROM removals;"
+        cur = db.execute_query(db_connection=db_connection, query=removals_query)
+        removals = cur.fetchall()
+        return render_template("removals/removals.j2", removals=removals)
+
+@app.route('/removals/part_detail/<string:pn>', methods=['POST', 'GET'])
+def part_info_page(pn):
+    if request.method == "GET":
+        pn_query = 'SELECT * FROM parts WHERE part_number="' + pn + '";'
+        cur = db.execute_query(db_connection=db_connection, query=pn_query)
+        pn_info = cur.fetchall()
+        nomenclature = pn_info[0]['name']
+        description = pn_info[0]['description']
+        return render_template("removals/part_detail.j2", pn=pn, nomenclature=nomenclature, description=description)
 
 # Listener
 if __name__ == "__main__":
