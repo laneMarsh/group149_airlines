@@ -10,19 +10,20 @@
             <legend><strong>Update Repair</strong></legend>
               <fieldset class="fields">
               <input type="hidden" name="repairID" id="updateRepairID" value="1">
-              <label> Repair Number: </label>  <select name="searchUpdate">
-                    <option>Select Repair Number</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-    
-              </select>
-                <label> Removal ID </label> <input type="text" name="fname">
-                <label> Date Recieved: </label> <input type="date" name="lname">
-                <label> Supplier: </label> <input type="text" name="lname">
-                <label> Price: </label> <input type="text" name="lname">
-                <label> Date Completed: </label> <input type="date" name="lname">
+              <label><b> Repair ID: {{repair_id}}</b></label> 
+              <p></p>
+                <label> Removal ID: </label>  <select name="removal_id">
+                    <option>{{removal_id['id_removal']}}</option>
+                        {% for removal in removal_ids %}
+                        <option value="{{removal['id_removal']}}">{{removal['id_removal']}}</option>
+                        {% endfor %}
+                </select>
+                <label> Date Recieved: </label> <input type="date" name="recieved", value={{recieved}}>
+                <label> Supplier: </label> <input type="text" name="supplier", value={{supplier}}>
+                <label> Price: </label> <input type="text" name="price", value={{price}}>
+                <label> Date Completed: </label> <input type="date" name="completed", value={{completed}}>
           </fieldset>
-              <input class="btn" type="submit" id="UpdateSaveRepair" value="Save Update Repair">
+              <input class="btn" type="submit" id="UpdateSaveRepair" value="Save Update">
               <input class="btn" type="button" value="Cancel" onClick="browseRepairs()">
         </form> 
     </div>

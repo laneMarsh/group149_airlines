@@ -54,7 +54,6 @@
 [ <a href="/">Home</a> | <a href="parts.html">Parts</a> | <a href="aircraft">Aircraft</a> | <a href="removals.html">Removals</a> | <a href="repairs">Repairs</a> | <a href="inventory_locations.html">Inventory</a>]
 
 <div id="browse">
-<p><a href="#" onClick="showAll()">Display all forms</a> </p>
 <table border="1" cellpadding="5">
   <tr>
     {% for key in repairs[0].keys() %}
@@ -68,33 +67,11 @@
     {% for key in repair.keys() %}
     <td>{{repair[key]}}</td>
     {% endfor %}
-    <td><a href="" class="btn btn-default">Update Repair</a></td>
+    <td><a href="repairs/update/{{repair['id_repair']}}" class="btn btn-default">Update Repair</a></td>
     <td><a href="" class="btn btn-default">Delete Record</a></td>
   <tr>
   {% endfor %}
 </table>
 <input class="btn" type="submit" id="newRepair" value="Add New Repair" onClick="newRepair()">
-
-</div> <!-- browse -->
-<!-- insert -->
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<div id="delete" style="display: block">
-  <form method="POST" id="deleteRepair">
-      <legend><strong>Delete Repair</strong></legend>
-          <fieldset class="fields">
-          <p>Are you sure you wish to delete the following?</p>
-          <input type="hidden" name="repairID" id="deleterepairID" value="1">
-          <label><strong>Repair ID:</strong></label> 1
-            <label> <strong>Removal ID: </strong> </label> 1
-            <label> <strong>Part Number: </strong>987A6543-1</label> 
-
-            
-    </fieldset>
-    <input class="btn" type="submit" id="DeleteRepair" value="Delete Repair">
-          <input class="btn" type="button" value="Cancel" onClick="browseRepairs()">
-  </form> 
-</div><!-- delete -->
-
 </body>
 </html>

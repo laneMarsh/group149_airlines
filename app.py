@@ -75,7 +75,7 @@ def del_aircraft_parts(aircraft_id, pn):
         del_query = 'DELETE FROM aircraft_parts WHERE id_aircraft = "' + aircraft_id + '" AND part_number = "' + pn + '"'
         cur = db.execute_query(db_connection=db_connection, query=del_query)
         return redirect('/aircraft/parts/' + aircraft_id)
-    
+
 @app.route('/repairs', methods=['POST', 'GET'])
 def repairs_page():
     if request.method == "GET":
@@ -102,6 +102,45 @@ def add_repair():
             cur = db.execute_query(db_connection=db_connection, query=add_repair_query)
         return redirect('/repairs')
 
+@app.route('/repairs/update/<string:repair_id>', methods=['POST', 'GET'])
+def update_repair(repair_id):
+    if request.method == "GET":
+        removal_id_query = "SELECT id_removal FROM removals;"
+        the_removal_query = "SELECT id_removal FROM repairs WHERE id_repair = " + repair_id + ";"
+        the_recieved_query = "SELECT recieved FROM repairs WHERE id_repair = " + repair_id + ";"
+        the_supplier_query = "SELECT supplier FROM repairs WHERE id_repair = " + repair_id + ";"
+        the_price_query = "SELECT price FROM repairs WHERE id_repair = " + repair_id + ";"
+        the_completed_query = "SELECT completed FROM repairs WHERE id_repair = " + repair_id + ";"
+        cur = db.execute_query(db_connection=db_connection, query=removal_id_query)
+        removal_ids = cur.fetchall()
+        cur = db.execute_query(db_connection=db_connection, query=the_removal_query)
+        removal_id = cur.fetchone()
+        cur = db.execute_query(db_connection=db_connection, query=the_recieved_query)
+        recieved = cur.fetchone()['recieved']
+        cur = db.execute_query(db_connection=db_connection, query=the_supplier_query)
+        supplier = cur.fetchone()['supplier']
+        cur = db.execute_query(db_connection=db_connection, query=the_price_query)
+        price = cur.fetchone()['price']
+        cur = db.execute_query(db_connection=db_connection, query=the_completed_query)
+        completed = cur.fetchone()['completed']
+        return render_template("repairs/update_repair.j2", 
+        repair_id=repair_id, 
+        removal_ids=removal_ids, 
+        removal_id=removal_id,
+        recieved=recieved,
+        supplier=supplier,
+        price=price,
+        completed=completed)
+
+    if request.method == "POST":
+        removal_id = request.form["removal_id"]
+        recieved = request.form["recieved"]
+        supplier = request.form["supplier"]
+        price = request.form["price"]
+        completed = request.form["completed"]
+        update_repair_query = 'UPDATE repairs SET recieved="' + recieved + '", supplier="' + supplier + '", price="' + price + '", completed="' + completed + '" WHERE id_repair="' + repair_id + '";'
+        cur = db.execute_query(db_connection=db_connection, query=update_repair_query)
+        return redirect('/repairs')
 
 # Listener
 if __name__ == "__main__":
