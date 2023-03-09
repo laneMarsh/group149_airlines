@@ -1,0 +1,197 @@
+
+<html>
+<head>
+<title>Group 149 Airlines</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript">
+		function showform(dowhat) {
+			/*
+			* four DIVS: browse, install, update, delete
+			* this function sets one visible the others not
+			*/
+			if (dowhat == 'install'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('install').style.display = 'block';
+                document.getElementById('details').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}    
+			else if (dowhat == 'details'){
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('install').style.display = 'none';
+                document.getElementById('details').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('install').style.display = 'none';
+                document.getElementById('details').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('install').style.display = 'none';
+                document.getElementById('details').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+      else if (dowhat == 'all'){
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('install').style.display = 'block';
+                document.getElementById('details').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('install').style.display = 'none';
+                document.getElementById('details').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+        }
+    
+    function newRemoval() { showform('install'); }
+    function showDetails() {showform('details')}
+    function updateRemoval(pid) { showform('update'); }
+    function deleteRemoval(pid) { showform ('delete'); }
+    function browseRemovals() { showform ('browse'); }
+    function showAll() { showform ('all'); }
+</script>
+</head>
+
+<body onload="browseRemovals()">
+<h1>Removals</h1>
+
+[ <a href="/">Home</a> | <a href="parts">Parts</a> | <a href="aircraft">Aircraft</a> | <a href="removals">Removals</a> | <a href="repairs">Repairs</a> | <a href="inventory_locations">Inventory</a>]
+
+<div id="browse">
+<p><a href="#" onClick="showAll()">Display all forms</a> </p>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Removal Number</th>
+    <th>Removal Date</th>
+    <th>Removed Part Number</th>
+    <th>Aircraft ID</th>
+    <th>Replaced Part Number</th>
+    <th>Replacement Date</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td align="center" >1</td>
+    <td align="center" >2023-02-01 00:00:00</td>
+    <td align="center"><a href="#" onclick= "showDetails()">987A6543-1</a></td>
+    <td align="center">G1A-01</td>    
+    <td align="center"><a href="#" onclick= "showDetails()">987A6543-1</a></td>
+    <td>2023-02-02 00:00:00</td>
+    
+    <td><a href="#" onClick="updateRemoval('this.removalID')">Edit</a></td>
+    <td><a href="#" onclick="deleteRemoval('this.removalID')">Delete</a></td>
+  </tr>
+  <tr>
+    <td align="center" >2</td>
+    <td align="center" >2023-02-09 00:00:00</td>
+    <td align="center"><a href="#" onclick= "showDetails()">987A6543-2</a></td>
+    <td align="center">G1A-02</td>    
+    <td align="center">-</td>
+    <td>2023-02-02 00:00:00</td>
+    <td><a href="#" onClick="updateRemoval('this.removalID')">Edit</a></td>
+    <td><a href="#" onclick="deleteRemoval('this.removalID')">Delete</a></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<legend><strong>Search Removals</strong></legend>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Removal Number</th>
+    <th>Removal Date</th>
+    <th>Removed Part Number</th>
+    <th>Aircraft ID</th>
+    <th>Replaced Part Number</th>
+    <th>Replacement Date</th>
+    
+    
+  </tr>
+  <tr>
+    <td align="center" ><input type="text" size="10"></td>
+    <td align="center" ><input type="date" size="10"></td>
+    <td align="center"><input type="text" size="10"></a></td>
+    <td align="center"><input type="text" size="10"></td>    
+    <td align="center"><input type="text" size="10"></a></td>
+    <td align="center" ><input type="date" size="10"></td>
+  </tr>
+</table>
+<input class="btn" type="button" value="Search Removals" >
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="install">
+    <form method="POST" id="addInstall">
+        <legend><strong>Install Part</strong></legend>
+            <fieldset class="fields">
+                <label>Removal Number: </label> <input type="text" name="lname">
+                <label>Installed Part Number:  </label> <input type="text" name="homeworld">
+            </fieldset>
+            <input class="btn" type="submit" id="addRemoval" value="Add Installed Part">
+            <input class="btn" type="button" value="Cancel" onClick="browseRemovals()">
+	</form> 
+</div><!-- install -->
+<p>&nbsp;</p>
+<div id = "details">
+    <table border="1" cellpadding="5">
+        <tr>
+          <th>Part Number</th>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td align="center" >987A6543-1</td>
+          <td align="center" >Left Wing</td>
+          <td align="center">Provides lift and attaches to the left side</td>
+        </tr>
+      </table>
+      <input class="btn" type="button" value="Cancel" onClick="browseRemovals()">
+</div> <!-- details -->
+<p>&nbsp;</p>
+<div id="update">
+
+    <form method="POST" id="updateRemoval">
+        <legend><strong>Update Removal</strong></legend>
+          <fieldset class="fields">
+          <input type="hidden" name="removalID" id="updateRemovalID" value="1">
+          <label> Removal Number: </label>  <select name="searchUpdate">
+                <option>Select Removal Number</option>
+                <option value="123A4567-1">1</option>
+                <option value="987A6543-1">2</option>
+          </select>
+            <label> Removal Date: </label> <input type="date" name="fname">
+            <label> Removed Part Number:  </label> <input type="text" name="lname">
+            <label> Aircraft ID:  </label> <input type="text" name="lname">
+            <label> Installed Part Number:  </label> <input type="text" name="lname">
+            <label> Replacement Date: </label> <input type="text" name="lname">
+      </fieldset>
+          <input class="btn" type="submit" id="UpdateSaveRemoval" value="Update Removal">
+          <input class="btn" type="button" value="Cancel" onClick="browseRemovals()">
+	</form> 
+</div><!-- update -->
+<p>&nbsp;</p>
+<div id="delete" style="display: block">
+  <form method="POST" id="deleteRemoval">
+      <legend><strong>Delete Removal</strong></legend>
+          <fieldset class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+            <input type="hidden" name="removalID" id="deleteremovalID" value="1">
+            <label><strong>Removal Number:</strong></label> 1
+            <label> <strong>Part Number: </strong> </label> 987A6543-1
+            <label> <strong>Aircraft ID: </strong> </label> G1A-01
+            
+    </fieldset>
+    <input class="btn" type="submit" id="DeleteRemoval" value="Delete Removal">
+          <input class="btn" type="button" value="Cancel" onClick="browseRemovals()">
+  </form> 
+</div><!-- delete -->
+
+</body>
+</html>
