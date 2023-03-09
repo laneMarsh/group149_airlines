@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <title>Group 149 Airlines</title>
@@ -16,85 +17,84 @@
 			}
 			else if (dowhat == 'update'){
 				document.getElementById('browse').style.display = 'none';
-                document.getElementById('showParts').style.display = 'none';
 				document.getElementById('insert').style.display = 'none';
 				document.getElementById('update').style.display = 'block';
 				document.getElementById('delete').style.display = 'none';
 			}
 			else if (dowhat == 'delete'){
 				document.getElementById('browse').style.display = 'none';
-                document.getElementById('showParts').style.display = 'none';
 				document.getElementById('insert').style.display = 'none';
 				document.getElementById('update').style.display = 'none';
 				document.getElementById('delete').style.display = 'block';
 			}
-            else if (dowhat == 'showParts'){
-				document.getElementById('browse').style.display = 'none';
-                document.getElementById('showParts').style.display = 'block';
-				document.getElementById('insert').style.display = 'none';
-				document.getElementById('update').style.display = 'none';
-				document.getElementById('delete').style.display = 'none';
-			}
-            else if (dowhat == 'all'){
+      else if (dowhat == 'all'){
 				document.getElementById('browse').style.display = 'block';
-                document.getElementById('showParts').style.display = 'none';
 				document.getElementById('insert').style.display = 'block';
 				document.getElementById('update').style.display = 'block';
 				document.getElementById('delete').style.display = 'block';
 			}
-      else if (dowhat == 'removePart'){
-				document.getElementById('browse').style.display = 'nonw';
-        document.getElementById('showParts').style.display = 'block';
-				document.getElementById('insert').style.display = 'none';
-				document.getElementById('update').style.display = 'none';
-        document.getElementById('removePart').style.display = 'block';
-				document.getElementById('delete').style.display = 'none';
-			}
 			else { //by default display browse
 				document.getElementById('browse').style.display = 'block';
-        document.getElementById('showParts').style.display = 'none';
 				document.getElementById('insert').style.display = 'none';
 				document.getElementById('update').style.display = 'none';
-        document.getElementById('removePart').style.display = 'none';
 				document.getElementById('delete').style.display = 'none';
 			}
 		}
-    function newAircraft() { location.href = "/aircraft/create"; }
-    function updateAircraft(pid) { showform('update'); }
-    function showParts(pid) { showform ('showParts');}
-    function browseAircraft() { showform ('browse'); }
-    function removePart() {showform('removePart');}
+    function newRepair() { location.href = "/repairs/create"; }
+    function updateRepair(pid) { showform('update'); }
+    function deleteRepair(pid) { showform ('delete'); }
+    function browseRepairs() { showform ('browse'); }
     function showAll() { showform ('all'); }
 </script>
 </head>
 
-<body onload="browseAircraft()">
-<h1>Aircraft</h1>
+<body onload="browseRepairs()">
+<h1>Repairs</h1>
 
 [ <a href="/">Home</a> | <a href="parts.html">Parts</a> | <a href="aircraft">Aircraft</a> | <a href="removals.html">Removals</a> | <a href="repairs">Repairs</a> | <a href="inventory_locations.html">Inventory</a>]
 
 <div id="browse">
+<p><a href="#" onClick="showAll()">Display all forms</a> </p>
 <table border="1" cellpadding="5">
   <tr>
-    {% for key in aircraft[0].keys() %}
+    {% for key in repairs[0].keys() %}
     <th>{{ key }}</th>
     {% endfor %}
     <th></th>
     <th></th>
   </tr>
-  {% for ac in aircraft %}
+  {% for repair in repairs %}
   <tr>
-    {% for key in ac.keys() %}
-    <td>{{ac[key]}}</td>
+    {% for key in repair.keys() %}
+    <td>{{repair[key]}}</td>
     {% endfor %}
-    <td><a href="aircraft/delete/{{ac['id_aircraft']}}" class="btn btn-default">Retire Aircraft</a></td>
-    <td><a href="aircraft/parts/{{ac['id_aircraft']}}" class="btn btn-default">View Parts</a></td>
+    <td><a href="" class="btn btn-default">Update Repair</a></td>
+    <td><a href="" class="btn btn-default">Delete Record</a></td>
   <tr>
   {% endfor %}
 </table>
-<input class="btn" type="submit" id="newAircraft" value="Add New Aircraft" onClick="newAircraft()">
+<input class="btn" type="submit" id="newRepair" value="Add New Repair" onClick="newRepair()">
 
 </div> <!-- browse -->
+<!-- insert -->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div id="delete" style="display: block">
+  <form method="POST" id="deleteRepair">
+      <legend><strong>Delete Repair</strong></legend>
+          <fieldset class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+          <input type="hidden" name="repairID" id="deleterepairID" value="1">
+          <label><strong>Repair ID:</strong></label> 1
+            <label> <strong>Removal ID: </strong> </label> 1
+            <label> <strong>Part Number: </strong>987A6543-1</label> 
+
+            
+    </fieldset>
+    <input class="btn" type="submit" id="DeleteRepair" value="Delete Repair">
+          <input class="btn" type="button" value="Cancel" onClick="browseRepairs()">
+  </form> 
+</div><!-- delete -->
 
 </body>
 </html>

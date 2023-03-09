@@ -1,0 +1,29 @@
+<html>
+    <script language="JavaScript">
+        function browseRepairs() {
+            location.href = "/repairs";
+        };
+    </script> 
+    <div id="update">
+
+        <form method="POST" id="updateRepair">
+            <legend><strong>Update Repair</strong></legend>
+              <fieldset class="fields">
+              <input type="hidden" name="repairID" id="updateRepairID" value="1">
+              <label> Repair Number: </label>  <select name="searchUpdate">
+                    <option>Select Repair Number</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+    
+              </select>
+                <label> Removal ID </label> <input type="text" name="fname">
+                <label> Date Recieved: </label> <input type="date" name="lname">
+                <label> Supplier: </label> <input type="text" name="lname">
+                <label> Price: </label> <input type="text" name="lname">
+                <label> Date Completed: </label> <input type="date" name="lname">
+          </fieldset>
+              <input class="btn" type="submit" id="UpdateSaveRepair" value="Save Update Repair">
+              <input class="btn" type="button" value="Cancel" onClick="browseRepairs()">
+        </form> 
+    </div>
+</html>

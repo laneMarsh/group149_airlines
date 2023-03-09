@@ -1,0 +1,24 @@
+<html>
+<script language="JavaScript">
+    function browseRepairs() {
+        location.href = "/repairs";
+    };
+</script> 
+<div id="insert">
+    <form method="POST" id="addRepair">
+        <legend><strong>Add Repair</strong></legend>
+            <fieldset class="fields">
+                <label> Removal ID: </label>  <select name="removal_id">
+                    <option>Select Removal</option>
+                    {% for removal in removal_ids %}
+                    <option value="{{removal['id_removal']}}">{{removal['id_removal']}}</option>
+                    {% endfor %}
+              </select>
+                <label> Supplier </label> <input type="text" name="supplier">
+                <label> Price:  </label> <input type="text" name="price">
+            </fieldset>
+            <input class="btn" type="submit" id="addRepair" value="Add Repair">
+            <input class="btn" type="button" value="Cancel" onClick="browseRepairs()">
+	</form> 
+</div>
+</html>

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, json, request, redirect
 import database.db_connector as db
 import os
+from datetime import datetime
 
 # Configuration
 app = Flask(__name__)
@@ -20,7 +21,6 @@ def aircraft_page():
         ac_table = cur.fetchall()
         return render_template("aircraft/aircraft.j2", aircraft=ac_table)
     
-
 @app.route('/aircraft/create', methods=['POST', 'GET'])
 def add_aircraft():
     if request.method == "GET":
@@ -76,11 +76,34 @@ def del_aircraft_parts(aircraft_id, pn):
         cur = db.execute_query(db_connection=db_connection, query=del_query)
         return redirect('/aircraft/parts/' + aircraft_id)
     
+@app.route('/repairs', methods=['POST', 'GET'])
+def repairs_page():
+    if request.method == "GET":
+        repairs_query = "SELECT * FROM repairs;"
+        cur = db.execute_query(db_connection=db_connection, query=repairs_query)
+        repairs_table = cur.fetchall()
+        return render_template("repairs/repairs.j2", repairs=repairs_table)
+    
+@app.route('/repairs/create', methods=['POST', 'GET'])
+def add_repair():
+    if request.method == "GET":
+        removal_id_query = "SELECT id_removal FROM removals;"
+        cur = db.execute_query(db_connection=db_connection, query=removal_id_query)
+        removal_ids = cur.fetchall()
+        return render_template("repairs/add_repair.j2", removal_ids=removal_ids)
 
-
+    if request.method == "POST":
+        removal_id = request.form['removal_id']
+        supplier = request.form['supplier']
+        price = request.form['price']
+        recieved = datetime.today().strftime('%Y-%m-%d')
+        add_repair_query = 'INSERT INTO repairs (recieved, id_removal, supplier, price) VALUES ("' + recieved + '", "' + removal_id + '", "' + supplier + '", "' + price + '");'
+        if removal_id != "" and supplier != "":
+            cur = db.execute_query(db_connection=db_connection, query=add_repair_query)
+        return redirect('/repairs')
 
 
 # Listener
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 45434))
+    port = int(os.environ.get('PORT', 45435))
     app.run(port=port, debug=True)

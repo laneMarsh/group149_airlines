@@ -198,7 +198,6 @@ VALUES
 
 INSERT INTO repairs (
     recieved,
-    completed,
     id_removal,
     supplier,
     price
@@ -206,7 +205,7 @@ INSERT INTO repairs (
 VALUES
 (
     "2023-02-02",
-    "2018-02-09",
+    NULL,
     "1",
     "Spirit Aerospace",
     "350.00"
