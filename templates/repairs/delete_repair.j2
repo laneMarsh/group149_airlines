@@ -1,5 +1,9 @@
 <html>
-    
+  <script language="JavaScript">
+    function browseRepairs() {
+        location.href = "/repairs";
+    };
+</script> 
 </div>
 <div id="delete" style="display: block">
   <form method="POST" id="deleteRepair">
@@ -7,9 +11,9 @@
           <fieldset class="fields">
           <p>Are you sure you wish to delete the following?</p>
           <input type="hidden" name="repairID" id="deleterepairID" value="1">
-          <label><strong>Repair ID:</strong></label> 1
-            <label> <strong>Removal ID: </strong> </label> 1
-            <label> <strong>Part Number: </strong>987A6543-1</label> 
+          <label><strong>Repair ID:</strong>{{repair_id}}</label>
+            <label> <strong>Removal ID: </strong>{{removal_id}}</label>
+            <label> <strong>Part Number: </strong>{{pn}}</label> 
 
             
     </fieldset>

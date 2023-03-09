@@ -142,6 +142,22 @@ def update_repair(repair_id):
         cur = db.execute_query(db_connection=db_connection, query=update_repair_query)
         return redirect('/repairs')
 
+@app.route('/repairs/delete/<string:repair_id>', methods=['POST', 'GET'])
+def delete_repair(repair_id):
+    if request.method == "GET":
+        delete_repair_query = 'SELECT repairs.id_removal, removals.removed_part FROM repairs INNER JOIN removals ON repairs.id_removal = removals.id_removal WHERE id_repair="' + repair_id + '";'
+        cur = db.execute_query(db_connection=db_connection, query=delete_repair_query)
+        delete_repair = cur.fetchall()
+        removal_id = delete_repair[0]['id_removal']
+        pn = delete_repair[0]['removed_part']
+        return render_template("repairs/delete_repair.j2", repair_id=repair_id, removal_id=removal_id, pn=pn)
+    
+    if request.method == "POST":
+        del_query = 'DELETE FROM repairs WHERE id_repair = "' + repair_id + '"'
+        cur = db.execute_query(db_connection=db_connection, query=del_query)
+        return redirect('/repairs')
+
+
 # Listener
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 45435))
