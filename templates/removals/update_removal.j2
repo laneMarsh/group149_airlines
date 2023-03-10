@@ -1,0 +1,35 @@
+<html>
+    <script language="JavaScript">
+        function browseRemovals() {
+            location.href = "/removals";
+        };
+    </script> 
+    <div id="update">
+
+        <form method="POST" id="updateRemoval">
+            <legend><strong>Update Removal</strong></legend>
+                <fieldset class="fields">
+                <input type="hidden" name="removalID" id="updateRemovalID" value="1">
+                <label><b> Removal Number: {{removal_id}}</b></label>  
+                <p></p>
+                <label> Removal Date:  {{rem_date}}</label>
+                <p></p>
+                <label> Removed Part Number:  {{rem_pn}}</label>
+                <p></p>
+                <label> Aircraft ID:  {{ac_id}}</label>
+                <p></p>
+                <label> Installed Part Number:  </label>
+                    <select name="inst_pn">
+                        <option>Select Part Number</option>
+                        {% for pn_id in pn_ids %}
+                        <option value="{{pn_id['part_number']}}">{{pn_id['part_number']}}</option>
+                        {% endfor %}
+                </select>
+                <p></p>
+                <label> Replacement Date: </label> <input type="date" name="inst_date">
+            </fieldset>
+              <input class="btn" type="submit" id="UpdateSaveRemoval" value="Update Removal">
+              <input class="btn" type="button" value="Cancel" onClick="browseRemovals()">
+        </form> 
+    </div>
+</html>

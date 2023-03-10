@@ -196,6 +196,28 @@ def add_removal():
             cur = db.execute_query(db_connection=db_connection, query=add_removal_query)
         return redirect('/removals')
 
+@app.route('/removals/update/<string:removal_id>', methods=['POST', 'GET'])
+def update_removal(removal_id):
+    if request.method == "GET":
+        rem_info_query = 'SELECT id_removal, removal_date, removed_part, id_aircraft FROM removals WHERE id_removal = "' + removal_id + '";'
+        cur = db.execute_query(db_connection=db_connection, query=rem_info_query)
+        pn_query = "SELECT part_number FROM parts;"
+        result = cur.fetchone()
+        rem_date = result['removal_date']
+        rem_pn = result['removed_part']
+        ac_id = result['id_aircraft']
+        cur = db.execute_query(db_connection=db_connection, query=pn_query)
+        pn_ids = cur.fetchall()
+        return render_template("removals/update_removal.j2", removal_id=removal_id, rem_date=rem_date, rem_pn=rem_pn, ac_id=ac_id, pn_ids=pn_ids)
+
+    if request.method == "POST":
+        inst_pn = request.form["inst_pn"]
+        rep_date = request.form["inst_date"]
+        update_removal_query = 'UPDATE removals SET installed_part="' + inst_pn + '", replacement_date="' + rep_date + '" WHERE id_removal="' + removal_id + '";'
+        cur = db.execute_query(db_connection=db_connection, query=update_removal_query)
+        return redirect('/removals')
+
+
 # Listener
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 45435))
