@@ -53,7 +53,7 @@
 			}
         }
     
-    function newRemoval() { showform('install'); }
+    function newRemoval() { location.href = "/removals/create"; }
     function showDetails() {showform('details')}
     function updateRemoval(pid) { showform('update'); }
     function deleteRemoval(pid) { showform ('delete'); }
@@ -90,59 +90,9 @@
   </tr>
   {% endfor %}
 </table>
-<p>&nbsp;</p>
-<legend><strong>Search Removals</strong></legend>
-<table border="1" cellpadding="5">
-  <tr>
-    <th>Removal Number</th>
-    <th>Removal Date</th>
-    <th>Removed Part Number</th>
-    <th>Aircraft ID</th>
-    <th>Replaced Part Number</th>
-    <th>Replacement Date</th>
-    
-    
-  </tr>
-  <tr>
-    <td align="center" ><input type="text" size="10"></td>
-    <td align="center" ><input type="date" size="10"></td>
-    <td align="center"><input type="text" size="10"></a></td>
-    <td align="center"><input type="text" size="10"></td>    
-    <td align="center"><input type="text" size="10"></a></td>
-    <td align="center" ><input type="date" size="10"></td>
-  </tr>
-</table>
-<input class="btn" type="button" value="Search Removals" >
-<p>&nbsp;</p>
-</div> <!-- browse -->
-<div id="install">
-    <form method="POST" id="addInstall">
-        <legend><strong>Install Part</strong></legend>
-            <fieldset class="fields">
-                <label>Removal Number: </label> <input type="text" name="lname">
-                <label>Installed Part Number:  </label> <input type="text" name="homeworld">
-            </fieldset>
-            <input class="btn" type="submit" id="addRemoval" value="Add Installed Part">
-            <input class="btn" type="button" value="Cancel" onClick="browseRemovals()">
-	</form> 
-</div><!-- install -->
-<p>&nbsp;</p>
-<div id = "details">
-    <table border="1" cellpadding="5">
-        <tr>
-          <th>Part Number</th>
-          <th>Name</th>
-          <th>Description</th>
-        </tr>
-        <tr>
-          <td align="center" >987A6543-1</td>
-          <td align="center" >Left Wing</td>
-          <td align="center">Provides lift and attaches to the left side</td>
-        </tr>
-      </table>
-      <input class="btn" type="button" value="Cancel" onClick="browseRemovals()">
-</div> <!-- details -->
-<p>&nbsp;</p>
+<input class="btn" type="button" value="Add Removal" onClick="newRemoval()">
+<p></p>
+<p></p>
 <div id="update">
 
     <form method="POST" id="updateRemoval">

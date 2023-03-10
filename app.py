@@ -175,6 +175,27 @@ def part_info_page(pn):
         description = pn_info[0]['description']
         return render_template("removals/part_detail.j2", pn=pn, nomenclature=nomenclature, description=description)
 
+@app.route('/removals/create', methods=['POST', 'GET'])
+def add_removal():
+    if request.method == "GET":
+        ac_query = "SELECT id_aircraft FROM aircraft;"
+        pn_query = "SELECT part_number FROM parts;"
+        cur = db.execute_query(db_connection=db_connection, query=ac_query)
+        ac_ids = cur.fetchall()
+        cur = db.execute_query(db_connection=db_connection, query=pn_query)
+        pn_ids = cur.fetchall()
+        rem_date = datetime.today().strftime('%Y-%m-%d')
+        return render_template("removals/add_removal.j2", rem_date=rem_date, ac_ids=ac_ids, pn_ids=pn_ids)
+
+    if request.method == "POST":
+        removal_date = request.form['removed_date']
+        ac_id = request.form['id_aircraft']
+        rem_pn = request.form['rem_pn']
+        add_removal_query = 'INSERT INTO removals (removal_date, id_aircraft, removed_part) VALUES ("' + removal_date + '", "' + ac_id + '", "' + rem_pn + '");'
+        if removal_date != "" and ac_id != "" and rem_pn != "":
+            cur = db.execute_query(db_connection=db_connection, query=add_removal_query)
+        return redirect('/removals')
+
 # Listener
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 45435))
