@@ -86,25 +86,11 @@
     <td align="center"><a href="removals/part_detail/{{removal['installed_part']}}">{{removal['installed_part']}}</a></td>
     
     <td><a href="removals/update/{{removal['id_removal']}}" class="btn btn-default">Update Record</a></td>
-    <td><a href="#" onclick="deleteRemoval('this.removalID')">Delete</a></td>
+    <td><a href="removals/delete/{{removal['id_removal']}}" class="btn btn-default">Delete</a></td>
   </tr>
   {% endfor %}
 </table>
-<input class="btn" type="button" value="Add Removal" onClick="newRemoval()">
 <p></p>
-<div id="delete" style="display: block">
-  <form method="POST" id="deleteRemoval">
-      <legend><strong>Delete Removal</strong></legend>
-          <fieldset class="fields">
-          <p>Are you sure you wish to delete the following?</p>
-            <input type="hidden" name="removalID" id="deleteremovalID" value="1">
-            <label><strong>Removal Number:</strong></label> 1
-            <label> <strong>Part Number: </strong> </label> 987A6543-1
-            <label> <strong>Aircraft ID: </strong> </label> G1A-01
-    </fieldset>
-    <input class="btn" type="submit" id="DeleteRemoval" value="Delete Removal">
-          <input class="btn" type="button" value="Cancel" onClick="browseRemovals()">
-  </form> 
-</div>
+<input class="btn" type="button" value="Add Removal" onClick="newRemoval()">
 </body>
 </html>

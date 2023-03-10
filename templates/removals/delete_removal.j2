@@ -1,0 +1,25 @@
+<html>
+    <script language="JavaScript">
+        function browseRemovals() {
+            location.href = "/removals";
+        };
+    </script> 
+    <div id="delete" style="display: block">
+        <form method="POST" id="deleteRemoval">
+            <legend><strong>Delete Removal</strong></legend>
+                <fieldset class="fields">
+                <p>Are you sure you wish to delete the following?</p>
+                  <input type="hidden" name="removalID" id="deleteremovalID" value="1">
+                  <label><strong>Removal Number:</strong></label> {{removal_id}}
+                  <p></p>
+                  <label> <strong>Part Number: </strong> </label> {{rem_pn}}
+                  <p></p>
+                  <label> <strong>Aircraft ID: </strong> </label> {{ac_id}}
+                  <p></p>
+                  <label> <strong>Removal Date: </strong> </label> {{rem_date}}
+          </fieldset>
+          <input class="btn" type="submit" id="DeleteRemoval" value="Delete Removal">
+                <input class="btn" type="button" value="Cancel" onClick="browseRemovals()">
+        </form> 
+      </div>
+</html>
